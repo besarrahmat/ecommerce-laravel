@@ -7,9 +7,15 @@ use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(): void
     {
     }
@@ -36,8 +42,13 @@ class CartController extends Controller
         return redirect()->route('product.index');
     }
 
-    public function show(Cart $cart): void
+    public function show(Request $request): View
     {
+        $user_id = $request->user()->id;
+        $carts = Cart::where('user_id', $user_id)
+            ->get();
+
+        return view('cart.show', compact('carts'));
     }
 
     public function edit(Cart $cart): void
