@@ -14,6 +14,9 @@
                                     alt="{{ $product->image }}">
                                 <div class="card-body">
                                     <p class="card-text">{{ $product->name }}</p>
+                                    <form action="{{ route('product.show', $product) }}" method="GET">
+                                        <button type="submit" class="btn btn-primary">Detail</button>
+                                    </form>
                                 </div>
                             </div>
                         @endforeach
