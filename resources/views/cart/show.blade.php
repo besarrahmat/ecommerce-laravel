@@ -14,6 +14,18 @@
                                     <img class="card-img-top" src="{{ url('storage/products/' . $cart->product->image) }}">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $cart->product->name }}</h5>
+                                        <form action="{{ route('cart.update', $cart) }}" method="post">
+                                            @method('patch')
+                                            @csrf
+
+                                            <div class="input-group mb-3">
+                                                <input type="number" class="form-control" aria-describedby="basic-addon2"
+                                                    name="amount" value={{ $cart->amount }}>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" type="submit">Update</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             @endforeach

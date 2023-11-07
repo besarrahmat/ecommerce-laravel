@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CartStoreRequest;
+use App\Http\Requests\CartUpdateRequest;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
@@ -55,8 +56,13 @@ class CartController extends Controller
     {
     }
 
-    public function update(Request $request, Cart $cart): void
+    public function update(CartUpdateRequest $request, Cart $cart): RedirectResponse
     {
+        $cart->update([
+            'amount' => $request->amount,
+        ]);
+
+        return redirect()->route('cart.show');
     }
 
     public function destroy(Cart $cart): void
