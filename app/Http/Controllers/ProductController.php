@@ -10,8 +10,11 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    public function index(): void
+    public function index(): View
     {
+        $products = Product::all();
+
+        return view('product.index', compact('products'));
     }
 
     public function create(): View
