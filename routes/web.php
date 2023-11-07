@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,5 @@ Route::get('product/{product}', [ProductController::class, 'show'])->name('produ
 Route::get('product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
 Route::patch('product/{product}', [ProductController::class, 'update'])->name('product.update');
 Route::delete('product/{product}', [ProductController::class, 'delete'])->name('product.delete');
+
+Route::post('cart/{product}', [CartController::class, 'store'])->name('cart.store');
