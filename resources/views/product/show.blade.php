@@ -19,6 +19,9 @@
                                 <h3>Rp{{ $product->price }}</h3>
                                 <hr>
                                 <p>{{ $product->stock }} left</p>
+                                <form action="{{ route('product.edit', $product) }}" method="GET">
+                                    <button type="submit" class="btn btn-primary">Edit Product</button>
+                                </form>
                             </div>
                         </div>
                     </div>
