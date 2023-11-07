@@ -10,15 +10,15 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function index(Request $request): void
+    public function index(): void
     {
     }
 
-    public function create(Request $request): void
+    public function create(): void
     {
     }
 
-    public function store(Product $product, CartStoreRequest $request): RedirectResponse
+    public function store(CartStoreRequest $request, Product $product): RedirectResponse
     {
         $user_id = $request->user()->id;
         $product_id = $product->id;
@@ -36,11 +36,11 @@ class CartController extends Controller
         return redirect()->route('product.index');
     }
 
-    public function show(Request $request, Cart $cart): void
+    public function show(Cart $cart): void
     {
     }
 
-    public function edit(Request $request, Cart $cart): void
+    public function edit(Cart $cart): void
     {
     }
 
@@ -48,7 +48,7 @@ class CartController extends Controller
     {
     }
 
-    public function destroy(Request $request, Cart $cart): void
+    public function destroy(Cart $cart): void
     {
     }
 }
