@@ -77,7 +77,10 @@ class ProductController extends Controller
         return redirect()->route('product.show', compact('product'));
     }
 
-    public function destroy(Product $product): void
+    public function destroy(Product $product): RedirectResponse
     {
+        $product->delete();
+
+        return redirect()->route('product.index');
     }
 }

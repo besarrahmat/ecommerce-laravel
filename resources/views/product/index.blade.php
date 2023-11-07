@@ -17,6 +17,11 @@
                                     <form action="{{ route('product.show', $product) }}" method="GET">
                                         <button type="submit" class="btn btn-primary">Detail</button>
                                     </form>
+                                    <form action="{{ route('product.destroy', $product) }}" method="post">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger mt-2">Delete</button>
+                                    </form>
                                 </div>
                             </div>
                         @endforeach
