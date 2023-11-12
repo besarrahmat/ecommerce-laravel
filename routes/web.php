@@ -40,5 +40,6 @@ Route::delete('cart/{cart}', [CartController::class, 'destroy'])->name('cart.des
 
 Route::get('order', [OrderController::class, 'index'])->name('order.index');
 Route::get('order/{order}', [OrderController::class, 'show'])->name('order.show');
+Route::post('order/{order}/pay', [OrderController::class, 'payment_receipt'])->name('order.receipt');
 
 Route::post('transaction', [TransactionController::class, 'store'])->name('transaction.store');

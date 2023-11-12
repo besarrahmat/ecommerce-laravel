@@ -16,6 +16,18 @@
                             <p>{{ $transaction->product->name }} - {{ $transaction->amount }} pcs</p>
                         @endforeach
                         <hr>
+
+                        @if ($order->is_paid == false && $order->payment_receipt == null)
+                            <form action="{{ route('order.receipt', $order) }}" method="post" enctype="multipart/form-data">
+                                @csrf
+
+                                <div class="form-group">
+                                    <label>Upload Your Payment Receipt</label>
+                                    <input type="file" name="payment_receipt" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>

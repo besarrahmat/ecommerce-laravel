@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderPaymentReceiptRequest;
 use App\Models\Order;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class OrderController extends Controller
@@ -38,5 +41,23 @@ class OrderController extends Controller
 
     public function destroy(Order $order): void
     {
+    }
+
+    public function payment_receipt(OrderPaymentReceiptRequest $request, Order $order): RedirectResponse
+    {
+        $request->validated();
+
+        $file = $request->file('payment_receipt');
+        $filename = date('U') . '-' . $order->id . '.' . $file->getClientOriginalExtension();
+
+        Storage::putFileAs('receipts', $file, $filename);
+
+        $order->update([
+            'payment_receipt' => $filename,
+        ]);
+
+        $request->session()->flash('order.id', $order->id);
+
+        return redirect()->back();
     }
 }
