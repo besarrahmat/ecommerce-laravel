@@ -65,7 +65,10 @@ class CartController extends Controller
         return redirect()->route('cart.show');
     }
 
-    public function destroy(Cart $cart): void
+    public function destroy(Cart $cart): RedirectResponse
     {
+        $cart->delete();
+
+        return redirect()->back();
     }
 }
