@@ -23,8 +23,9 @@ class OrderController extends Controller
     {
     }
 
-    public function show(Order $order): void
+    public function show(Order $order): View
     {
+        return view('order.show', compact('order'));
     }
 
     public function edit(Order $order): void
