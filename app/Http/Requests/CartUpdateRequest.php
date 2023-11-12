@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Cart;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
 
 class CartUpdateRequest extends FormRequest
 {

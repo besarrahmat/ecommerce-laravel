@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Cart;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CartStoreRequest extends FormRequest
@@ -19,8 +20,18 @@ class CartStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'amount' => ['required', 'gte:1'],
-        ];
+        $existing_cart = Cart::where('product_id', $this->product->id)
+            ->where('user_id', $this->user()->id)
+            ->first();
+
+        if ($existing_cart == null) {
+            return [
+                'amount' => ['required', 'gte:1', 'lte:' . $this->product->stock],
+            ];
+        } else {
+            return [
+                'amount' => ['required', 'gte:1', 'lte:' . ($this->product->stock - $existing_cart->amount)],
+            ];
+        }
     }
 }
