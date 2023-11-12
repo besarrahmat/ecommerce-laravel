@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -36,5 +37,7 @@ Route::post('cart/{product}', [CartController::class, 'store'])->name('cart.stor
 Route::get('cart', [CartController::class, 'show'])->name('cart.show');
 Route::patch('cart/{cart}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('cart/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
+
+Route::get('order', OrderController::class, ['index'])->name('order.index');
 
 Route::post('transaction', TransactionController::class, 'store')->name('transaction.store');
