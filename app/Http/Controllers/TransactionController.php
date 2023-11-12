@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Transaction;
@@ -19,7 +20,7 @@ class TransactionController extends Controller
     {
     }
 
-    public function store(): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         $user_id = $request->user()->id;
         $carts = Cart::where('user_id', $user_id)
@@ -40,7 +41,7 @@ class TransactionController extends Controller
                 'stock' => $product->stock - $cart->amount,
             ]);
 
-            Transaction::create([
+            $transaction = Transaction::create([
                 'order_id' => $order->id,
                 'product_id' => $cart->product_id,
                 'amount' => $cart->amount,
