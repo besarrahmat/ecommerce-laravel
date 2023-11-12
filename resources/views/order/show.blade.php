@@ -17,7 +17,7 @@
                         @endforeach
                         <hr>
 
-                        @if ($order->is_paid == false && $order->payment_receipt == null)
+                        @if ($order->is_paid == 0 && $order->payment_receipt == null)
                             <form action="{{ route('order.receipt', $order) }}" method="post" enctype="multipart/form-data">
                                 @csrf
 

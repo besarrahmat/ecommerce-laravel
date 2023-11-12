@@ -15,6 +15,19 @@
                                         <h5 class="card-title">Order ID {{ $order->id }}</h5>
                                     </a>
                                     <h6 class="card-subtitle mb-2 text-muted">By {{ $order->user->name }}</h6>
+
+                                    @if ($order->is_paid == 0 && $order->payment_receipt)
+                                        <div class="d-flex flew-row justify-content-around">
+                                            <a href="{{ url('storage/receipts/' . $order->payment_receipt) }} "
+                                                class="btn btn-primary">Show Payment Receipt</a>
+                                            <form action="{{ route('order.confirm', $order) }}" method="post">
+                                                @method('patch')
+                                                @csrf
+
+                                                <button class="btn btn-success" type="submit">Confirm</button>
+                                            </form>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach

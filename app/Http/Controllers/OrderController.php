@@ -60,4 +60,15 @@ class OrderController extends Controller
 
         return redirect()->back();
     }
+
+    public function confirm_payment(Request $request, Order $order): RedirectResponse
+    {
+        $order->update([
+            'is_paid' => 1,
+        ]);
+
+        $request->session()->flash('order.id', $order->id);
+
+        return redirect()->back();
+    }
 }
