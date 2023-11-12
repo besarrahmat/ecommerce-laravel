@@ -35,6 +35,14 @@
                                 </div>
                             @endforeach
                         </div>
+                        <div class="d-flex flex-column justify-content-end align-items-end">
+                            <form action="{{ route('transaction.store') }}" method="post">
+                                @csrf
+
+                                <button type="submit" class="btn btn-primary"
+                                    @if ($carts->isEmpty()) disabled @endif>Checkout</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
