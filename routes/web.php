@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,9 @@ Route::get('product/{product}', [ProductController::class, 'show'])->name('produ
 Route::get('product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
 Route::patch('product/{product}', [ProductController::class, 'update'])->name('product.update');
 Route::delete('product/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+
+Route::get('user', [UserController::class, 'show'])->name('user.show');
+Route::patch('user', [UserController::class, 'update'])->name('user.update');
 
 Route::post('cart/{product}', [CartController::class, 'store'])->name('cart.store');
 Route::get('cart', [CartController::class, 'show'])->name('cart.show');
