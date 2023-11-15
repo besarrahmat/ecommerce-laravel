@@ -16,17 +16,25 @@
                                     </a>
                                     <h6 class="card-subtitle mb-2 text-muted">By {{ $order->user->name }}</h6>
 
-                                    @if ($order->is_paid == 0 && $order->payment_receipt)
-                                        <div class="d-flex flew-row justify-content-around">
-                                            <a href="{{ url('storage/receipts/' . $order->payment_receipt) }} "
-                                                class="btn btn-primary">Show Payment Receipt</a>
-                                            <form action="{{ route('order.confirm', $order) }}" method="post">
-                                                @method('patch')
-                                                @csrf
+                                    @if ($order->is_paid == 1)
+                                        <p class="card-text">Paid</p>
+                                    @else
+                                        <p class="card-text">Unpaid</p>
+                                        @if ($order->payment_receipt)
+                                            <div class="d-flex flew-row justify-content-around">
+                                                <a href="{{ url('storage/receipts/' . $order->payment_receipt) }} "
+                                                    class="btn btn-primary">Show Payment Receipt</a>
 
-                                                <button class="btn btn-success" type="submit">Confirm</button>
-                                            </form>
-                                        </div>
+                                                @if (Auth::user()->is_admin)
+                                                    <form action="{{ route('order.confirm', $order) }}" method="post">
+                                                        @method('patch')
+                                                        @csrf
+
+                                                        <button class="btn btn-success" type="submit">Confirm</button>
+                                                    </form>
+                                                @endif
+                                            </div>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
