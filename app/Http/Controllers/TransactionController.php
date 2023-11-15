@@ -52,7 +52,7 @@ class TransactionController extends Controller
             $cart->delete();
         }
 
-        return redirect()->back();
+        return redirect()->route('order.show', $order);
     }
 
     public function show(Request $request): void
