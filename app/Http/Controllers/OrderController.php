@@ -13,7 +13,14 @@ class OrderController extends Controller
 {
     public function index(): View
     {
-        $orders = Order::all();
+        $user = auth()->user();
+
+        if ($user->is_admin == 1) {
+            $orders = Order::all();
+        } else {
+            $orders = Order::where('user_id', $user->id)
+                ->get();
+        }
 
         return view('order.index', compact('orders'));
     }
@@ -28,7 +35,13 @@ class OrderController extends Controller
 
     public function show(Order $order): View
     {
-        return view('order.show', compact('order'));
+        $user = auth()->user();
+
+        if ($user->is_admin == 1 || $order->user_id == $user->id) {
+            return view('order.show', compact('order'));
+        }
+
+        return redirect()->route('order.index');
     }
 
     public function edit(Order $order): void
